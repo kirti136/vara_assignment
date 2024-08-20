@@ -31,8 +31,8 @@ const DataTable = ({ data }) => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg overflow-auto">
-      <div className="overflow-x-auto">
+    <div className="bg-white overflow-auto">
+      <div className="overflow-x-auto min-h-[67vh]">
         <table className="min-w-full border-collapse border border-gray-200 rounded-lg">
           <thead className="bg-gray-50">
             <tr>
@@ -40,8 +40,8 @@ const DataTable = ({ data }) => {
               {Object.keys(data[0]).map((col, index) => (
                 <th
                   key={index}
-                  className={`px-4 py-2 text-left text-sm font-medium text-gray-700 border-b cursor-pointer ${
-                    selectedColumns[index] ? "bg-blue-100" : ""
+                  className={`px-4 py-4 text-left text-sm font-medium text-gray-700 border-b cursor-pointer ${
+                    selectedColumns[index] ? "bg-violet-200" : ""
                   }`}
                   onClick={() => handleColumnSelect(index)}
                 >
@@ -56,11 +56,11 @@ const DataTable = ({ data }) => {
                 key={rowIndex}
                 className={`${
                   selectedRows[rowIndex + startIndex]
-                    ? "bg-gray-100"
+                    ? "bg-violet-100"
                     : "bg-white"
                 } hover:bg-gray-50 transition-colors`}
               >
-                <td className="px-4 py-2 border-b">
+                <td className="px-4 py-3 border-b">
                   <input
                     type="checkbox"
                     checked={!!selectedRows[rowIndex + startIndex]}
@@ -71,7 +71,7 @@ const DataTable = ({ data }) => {
                   <td
                     key={index}
                     className={`px-4 py-2 border-b text-sm ${
-                      selectedColumns[index] ? "bg-blue-50" : ""
+                      selectedColumns[index] ? "bg-violet-100" : ""
                     }`}
                   >
                     {cell}
@@ -88,12 +88,23 @@ const DataTable = ({ data }) => {
         nextLabel={"Next →"}
         pageCount={Math.ceil(data.length / rowsPerPage)}
         onPageChange={handlePageClick}
-        containerClassName={"pagination flex justify-center mt-4"}
-        activeClassName={"active"}
-        pageClassName="mx-1"
-        activeLinkClassName="font-bold text-blue-600"
-        previousClassName="text-blue-600 hover:underline"
-        nextClassName="text-blue-600 hover:underline"
+        containerClassName={"flex justify-center items-center my-4"}
+        previousClassName={"text-gray-500 mr-2"}
+        nextClassName={"text-gray-500 ml-2"}
+        pageClassName={"mx-1"}
+        pageLinkClassName={
+          "flex items-center justify-center h-full py-2 px-4 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 "
+        }
+        activeClassName={
+          "bg-violet-100 h-full flex items-center justify-center rounded-md"
+        }
+        activeLinkClassName={
+          "font-bold text-violet-700 w-full h-full flex items-center justify-center"
+        }
+        breakClassName={"mx-1"}
+        breakLinkClassName={
+          "py-2 px-4 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
+        }
       />
     </div>
   );
