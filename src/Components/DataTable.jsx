@@ -37,17 +37,18 @@ const DataTable = ({ data }) => {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-4 py-2 border-b"></th>
-              {Object.keys(data[0]).map((col, index) => (
-                <th
-                  key={index}
-                  className={`px-4 py-4 text-left text-sm font-medium text-gray-700 border-b cursor-pointer ${
-                    selectedColumns[index] ? "bg-violet-200" : ""
-                  }`}
-                  onClick={() => handleColumnSelect(index)}
-                >
-                  {col}
-                </th>
-              ))}
+              {data[0] &&
+                Object.keys(data[0]).map((col, index) => (
+                  <th
+                    key={index}
+                    className={`px-4 py-4 text-left text-sm font-medium text-gray-700 border-b cursor-pointer ${
+                      selectedColumns[index] ? "bg-violet-200" : ""
+                    }`}
+                    onClick={() => handleColumnSelect(index)}
+                  >
+                    {col}
+                  </th>
+                ))}
             </tr>
           </thead>
           <tbody>

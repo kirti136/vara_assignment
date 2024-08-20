@@ -4,10 +4,23 @@ import DataTable from "./Components/DataTable";
 
 function App() {
   const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleFileUpload = (uploadedData) => {
     setData(uploadedData);
   };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredData = searchQuery
+    ? data.filter((row) =>
+        Object.values(row).some((value) =>
+          String(value).toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      )
+    : data;
 
   return (
     <div className="container mx-auto p-4">
@@ -16,7 +29,19 @@ function App() {
       </h1>
 
       <FileUpload onFileUpload={handleFileUpload} />
-      {data.length > 0 && <DataTable data={data} />}
+
+      {data.length > 0 && (
+        <div className="my-4">
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="block w-full text-sm p-2 border rounded-md mb-4 outline-none"
+          />
+          <DataTable data={filteredData} />
+        </div>
+      )}
     </div>
   );
 }
