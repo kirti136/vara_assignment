@@ -34,7 +34,6 @@ const FileUpload = ({ onFileUpload }) => {
   );
 };
 
-// Add PropTypes validation
 FileUpload.propTypes = {
   onFileUpload: PropTypes.func.isRequired,
 };
