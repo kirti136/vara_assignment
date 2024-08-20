@@ -5,3 +5,7 @@
 .bordertemp{
   border: 2px solid red;
 }
+
+.custom-width {
+  width: 500px;  /* Adjust as needed */
+}

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import FileUpload from "./Components/FileUpload";
 import DataTable from "./Components/DataTable";
+import SearchInput from "./Components/SearchInput";
+import SelectDropdown from "./Components/SelectDropdown";
 
 function App() {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterType, setFilterType] = useState("");
 
   const handleFileUpload = (uploadedData) => {
     setData(uploadedData);
@@ -14,13 +17,23 @@ function App() {
     setSearchQuery(event.target.value);
   };
 
-  const filteredData = searchQuery
-    ? data.filter((row) =>
-        Object.values(row).some((value) =>
-          String(value).toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      )
-    : data;
+  const handleTypeChange = (event) => {
+    setFilterType(event.target.value);
+  };
+
+  const filteredData = data
+    .filter((row) =>
+      searchQuery
+        ? Object.values(row).some((value) =>
+            String(value).toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        : true
+    )
+    .filter((row) =>
+      filterType
+        ? String(row.Type).trim().toLowerCase() === filterType.toLowerCase()
+        : true
+    );
 
   return (
     <div className="container mx-auto p-4">
@@ -31,17 +44,30 @@ function App() {
       <FileUpload onFileUpload={handleFileUpload} />
 
       {data.length > 0 && (
-        <div className="my-4">
-          <input
-            type="text"
-            placeholder="Search"
+        <div className="my-4 flex items-center gap-4">
+          <SearchInput
             value={searchQuery}
             onChange={handleSearchChange}
-            className="block w-full text-sm p-2 border rounded-md mb-4 outline-none"
+            placeholder="Search"
+            className="flex-grow"
           />
-          <DataTable data={filteredData} />
+
+          <SelectDropdown
+            name="fuelType"
+            value={filterType}
+            onChange={handleTypeChange}
+            options={[
+              { value: "", label: "All" },
+              { value: "petrol", label: "Petrol" },
+              { value: "diesel", label: "Diesel" },
+            ]}
+            label="Filter by Type"
+            className="w-32" // Adjust this value as needed
+          />
         </div>
       )}
+
+      <DataTable data={filteredData} />
     </div>
   );
 }

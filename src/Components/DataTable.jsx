@@ -84,29 +84,31 @@ const DataTable = ({ data }) => {
         </table>
       </div>
 
-      <ReactPaginate
-        previousLabel={"← Previous"}
-        nextLabel={"Next →"}
-        pageCount={Math.ceil(data.length / rowsPerPage)}
-        onPageChange={handlePageClick}
-        containerClassName={"flex justify-center items-center my-4"}
-        previousClassName={"text-gray-500 mr-2"}
-        nextClassName={"text-gray-500 ml-2"}
-        pageClassName={"mx-1"}
-        pageLinkClassName={
-          "flex items-center justify-center h-full py-2 px-4 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 "
-        }
-        activeClassName={
-          "bg-violet-100 h-full flex items-center justify-center rounded-md"
-        }
-        activeLinkClassName={
-          "font-bold text-violet-700 w-full h-full flex items-center justify-center"
-        }
-        breakClassName={"mx-1"}
-        breakLinkClassName={
-          "py-2 px-4 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
-        }
-      />
+      {data.length > rowsPerPage && (
+        <ReactPaginate
+          previousLabel={"← Previous"}
+          nextLabel={"Next →"}
+          pageCount={Math.ceil(data.length / rowsPerPage)}
+          onPageChange={handlePageClick}
+          containerClassName={"flex justify-center items-center my-4"}
+          previousClassName={"text-gray-500 mr-2"}
+          nextClassName={"text-gray-500 ml-2"}
+          pageClassName={"mx-1"}
+          pageLinkClassName={
+            "flex items-center justify-center h-full py-2 px-4 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
+          }
+          activeClassName={
+            "bg-violet-100 h-full flex items-center justify-center rounded-md"
+          }
+          activeLinkClassName={
+            "font-bold text-violet-700 w-full h-full flex items-center justify-center"
+          }
+          breakClassName={"mx-1"}
+          breakLinkClassName={
+            "py-2 px-4 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
+          }
+        />
+      )}
     </div>
   );
 };
