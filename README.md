@@ -1,7 +1,7 @@
 
 # Vara Assignment Frontend
 
-This is a React application for uploading CSV files and displaying their content in a paginated and filterable table. The project features file upload functionality, scrolling, pagination, row and column selection, search, and filtering capabilities.
+This is a React application built with Vite for uploading CSV files and displaying their content in a paginated and filterable table. The project includes features for file upload, scrolling, pagination, row and column selection, search, and filtering capabilities.
 
 ## Demo Video
 
