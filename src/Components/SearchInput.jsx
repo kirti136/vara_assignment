@@ -4,6 +4,7 @@ const SearchInput = ({ value, onChange, placeholder }) => {
   return (
     <div className="relative">
       <input
+        style={{ width: "20rem" }}
         type="text"
         value={value}
         onChange={onChange}

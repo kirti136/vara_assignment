@@ -7,7 +7,8 @@ import SelectDropdown from "./Components/SelectDropdown";
 function App() {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filterType, setFilterType] = useState("");
+  const [fuelType, setFuelType] = useState("");
+  const [seats, setSeats] = useState("");
 
   const handleFileUpload = (uploadedData) => {
     setData(uploadedData);
@@ -18,7 +19,11 @@ function App() {
   };
 
   const handleTypeChange = (event) => {
-    setFilterType(event.target.value);
+    setFuelType(event.target.value);
+  };
+
+  const handleSeatsChange = (event) => {
+    setSeats(event.target.value);
   };
 
   const filteredData = data
@@ -30,10 +35,11 @@ function App() {
         : true
     )
     .filter((row) =>
-      filterType
-        ? String(row.Type).trim().toLowerCase() === filterType.toLowerCase()
+      fuelType
+        ? String(row.Type).trim().toLowerCase() === fuelType.toLowerCase()
         : true
-    );
+    )
+    .filter((row) => (seats ? String(row.Seats).trim() === seats : true));
 
   return (
     <div className="container mx-auto p-4">
@@ -54,7 +60,7 @@ function App() {
 
           <SelectDropdown
             name="fuelType"
-            value={filterType}
+            value={fuelType}
             onChange={handleTypeChange}
             options={[
               { value: "", label: "All" },
@@ -62,7 +68,20 @@ function App() {
               { value: "diesel", label: "Diesel" },
             ]}
             label="Filter by Type"
-            className="w-32" // Adjust this value as needed
+          />
+
+          <SelectDropdown
+            name="seats"
+            value={seats}
+            onChange={handleSeatsChange}
+            options={[
+              { value: "", label: "All" },
+              { value: "4", label: "4 Seats" },
+              { value: "5", label: "5 Seats" },
+              { value: "7", label: "7 Seats" },
+              { value: "8", label: "8 Seats" },
+            ]}
+            label="Filter by Seats"
           />
         </div>
       )}
